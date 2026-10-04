@@ -1,0 +1,123 @@
+import("//build/library_headers.gni")
+
+library_haeders("cpfe_header") {
+    include_dir = "."
+}
+
+executable("cpfe") {
+    sources = [
+        "attribute.cc",
+        "c_gen_be.cc",
+        "cfe.cc",
+        "class_decl.cc",
+        "cmd_line.cc",
+        "const_ints.cc",
+        "cp_gen_be.cc",
+        "debug.cc",
+        "decl_inits.cc",
+        "decl_spec.cc",
+        "declarator.cc",
+        "decls.cc",
+        "def_arg.cc",
+        "disambig.cc",
+        "error.cc",
+        "expr.cc",
+        "exprutil.cc",
+        "extasm.cc",
+        "fe_init.cc",
+        "fe_wrapup.cc",
+        "fixed_pt.cc",
+        "float_pt.cc",
+        "floating.cc",
+        "folding.cc",
+        "func_def.cc",
+        "host_envir.cc",
+        "ifc_modules.cc",
+        "il.cc",
+        "il_alloc.cc",
+        "il_display.cc",
+        "il_read.cc",
+        "il_to_str.cc",
+        "il_walk.cc",
+        "il_write.cc",
+        "inline.cc",
+        "interpret.cc",
+        "layout.cc",
+        "lexical.cc",
+        "literals.cc",
+        "lookup.cc",
+        "lower_c99.cc",
+        "lower_eh.cc",
+        "lower_il.cc",
+        "lower_init.cc",
+        "lower_name.cc",
+        "macro.cc",
+        "mem_manage.cc",
+        "modules.cc",
+        "ms_attrib.cc",
+        "overload.cc",
+        "pch.cc",
+        "pragma.cc",
+        "preproc.cc",
+        "scope_stk.cc",
+        "src_seq.cc",
+        "statements.cc",
+        "symbol_ref.cc",
+        "symbol_tbl.cc",
+        "sys_predef.cc",
+        "target.cc",
+        "templates.cc",
+        "trans_copy.cc",
+        "trans_corresp.cc",
+        "trans_unit.cc",
+        "types.cc",
+
+        # Newer EDG sources
+        "cfe_daemon.cc",
+        "ifc_map_functions.cc",
+        "ifc_map_functions_acc.cc",
+        "ifc_map_functions_dbg.cc",
+        "ifc_map_functions_mut.cc",
+        "ifc_map_functions_val.cc",
+        "ifc_modules_read.cc",
+        "ifc_modules_templ.cc",
+        "ifc_modules_write.cc",
+        "unicode_name_fsm.cc",
+    ]
+
+    include_dirs = [
+        "$target_gen_dir",
+    ]
+
+    deps = [
+        ":generate_error_info",
+        ":cpfe_header",
+    ]
+}
+
+action("generate_error_info") {
+    script = "//build/run_tools.py"
+
+    deps = [
+        "//util:mk_errinfo"
+    ]
+
+    inputs = [
+        "error_msg.txt",
+        "error_tag.txt",
+    ]
+
+    outputs = [
+        "$target_gen_dir/err_codes.h",
+        "$target_gen_dir/err_data.h",
+    ]
+
+    args = [
+        rebase_path("$root_out_dir/mk_errinfo", root_build_dir),
+        rebase_path("error_msg.txt", root_build_dir),
+        rebase_path("error_tag.txt", root_build_dir),
+        rebase_path("$target_gen_dir/err_codes.h", root_build_dir),
+        rebase_path("$target_gen_dir/err_data.h", root_build_dir),
+    ]
+}
+

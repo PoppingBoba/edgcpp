@@ -1,0 +1,9 @@
+executable("mk_errinfo") {
+    sources = [
+        "mk_errinfo.cc"
+    ]
+
+    include_dirs = [
+        "../src"
+    ]
+}

@@ -1,0 +1,11 @@
+group("all") {
+    deps = [
+        ":apps"
+    ]
+}
+
+group("apps") {
+    deps = [
+        "//src:cpfe"
+    ]
+}
