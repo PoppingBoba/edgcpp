@@ -1,0 +1,14 @@
+declare_args() {
+    clang = "clang"
+    clangxx = "clang++"
+    llvm_ar = "llvm-ar"
+    ld_lld = "clang++"
+    llvm_readobj = "llvm-readobj"
+
+    target_triple = "x86_64-unknown-linux"
+}
+
+current_os = target_os
+current_cpu = target_cpu
+
+set_default_toolchain("//gn/toolchain/clang:clang")

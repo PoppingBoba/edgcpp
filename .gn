@@ -1,4 +1,4 @@
-buildconfig = "//build/BUILDCONFIG.gn"
+buildconfig = "//gn/BUILDCONFIG.gn"
 
 root = "//:all"
 

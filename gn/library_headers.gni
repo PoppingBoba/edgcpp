@@ -1,0 +1,29 @@
+template("library_haeders") {
+    _include_dir = "include"
+    if (defined(invoker.include_dir)) {
+        _include_dir = invoker.include_dir
+    }
+
+    config("${target_name}.config") {
+        forward_variables_from(invoker, ["defines"])
+        include_dirs = [ _include_dir ]
+    }
+
+    source_set(target_name) {
+        forward_variables_from(
+            invoker,
+            [
+                "deps",
+                "public_deps",
+                "public_configs",
+            ]
+        )
+        
+        configs = []
+        
+        if (!defined(public_configs)) {
+            public_configs = []
+        }
+        public_configs += [ ":${target_name}.config" ]
+    }
+}

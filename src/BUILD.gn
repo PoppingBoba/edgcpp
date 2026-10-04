@@ -1,4 +1,4 @@
-import("//build/library_headers.gni")
+import("//gn/library_headers.gni")
 
 library_haeders("cpfe_header") {
     include_dir = "."
@@ -96,7 +96,7 @@ executable("cpfe") {
 }
 
 action("generate_error_info") {
-    script = "//build/run_tools.py"
+    script = "//gn/run_tools.py"
 
     deps = [
         "//util:mk_errinfo"
